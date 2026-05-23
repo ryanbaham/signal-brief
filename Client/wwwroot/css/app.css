@@ -182,8 +182,14 @@ a {
 }
 
 .tldr-panel {
-    border-bottom: 1px solid var(--color-line);
-    padding-block: 2rem;
+    border: 1px solid color-mix(in srgb, var(--color-line) 82%, var(--color-surface));
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--color-surface) 86%, var(--color-paper));
+    box-shadow:
+        0 1.25rem 2.5rem -2rem rgba(37, 48, 65, 0.42),
+        0 0.4rem 1rem -0.85rem rgba(37, 48, 65, 0.24);
+    margin-block: 1.25rem 0.5rem;
+    padding: 1.4rem;
 }
 
 .section-title {
@@ -466,6 +472,10 @@ a {
         align-items: flex-end;
         padding-top: 0.75rem;
         text-align: right;
+    }
+
+    .tldr-panel {
+        padding: 1.75rem;
     }
 
     .tldr-list {
