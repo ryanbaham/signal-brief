@@ -82,26 +82,26 @@ else
                 <p class="section-kicker">@_issue.Featured.Kicker</p>
                 <h2 class="featured-title">@_issue.Featured.Title</h2>
                 <p class="featured-summary">@_issue.Featured.Summary</p>
-                <div class="article-body">
-                    @foreach (var paragraph in _issue.Featured.BodyParagraphs)
-                    {
-                        <p>@paragraph</p>
-                    }
-                </div>
-                <div class="article-meta" aria-label="Featured article metadata">
-                    @if (!string.IsNullOrWhiteSpace(_issue.Featured.ReadTime))
-                    {
-                        <span>@_issue.Featured.ReadTime</span>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(_issue.Featured.Category))
-                    {
-                        <span>@_issue.Featured.Category</span>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(_issue.Featured.Date))
-                    {
-                        <span>@_issue.Featured.Date</span>
-                    }
-                </div>
+            </div>
+            <div class="featured-copy article-body">
+                @foreach (var paragraph in _issue.Featured.BodyParagraphs)
+                {
+                    <p>@paragraph</p>
+                }
+            </div>
+            <div class="article-meta featured-meta" aria-label="Featured article metadata">
+                @if (!string.IsNullOrWhiteSpace(_issue.Featured.ReadTime))
+                {
+                    <span>@_issue.Featured.ReadTime</span>
+                }
+                @if (!string.IsNullOrWhiteSpace(_issue.Featured.Category))
+                {
+                    <span>@_issue.Featured.Category</span>
+                }
+                @if (!string.IsNullOrWhiteSpace(_issue.Featured.Date))
+                {
+                    <span>@_issue.Featured.Date</span>
+                }
             </div>
         </article>
 
