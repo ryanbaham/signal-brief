@@ -374,14 +374,21 @@ a {
     text-transform: uppercase;
 }
 
-.loading-panel,
+.loading-shell {
+    display: grid;
+    place-items: center;
+}
+
+.loading-panel {
+    display: grid;
+    justify-items: center;
+    padding-block: 5rem;
+    text-align: center;
+}
+
 .empty-state {
     display: grid;
     align-items: center;
-}
-
-.loading-panel,
-.empty-state {
     padding-block: 5rem;
 }
 

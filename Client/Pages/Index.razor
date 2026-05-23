@@ -7,10 +7,10 @@
 
 @if (_isLoading)
 {
-    <main class="newsletter-shell">
+    <main class="newsletter-shell loading-shell">
         <section class="loading-panel" aria-live="polite">
             <p class="section-kicker">Signal Brief</p>
-            <h1>Loading the latest issue...</h1>
+            <h1>@_loadingHeading</h1>
         </section>
     </main>
 }
@@ -166,6 +166,18 @@ else
     private bool _isLoading = true;
     private string? _errorMessage;
     private string? _currentIssueDate;
+    private string _loadingHeading = PickLoadingHeading(null);
+
+    private static readonly string[] LatestLoadingHeadings =
+    [
+        "Tuning the signal.",
+        "Separating signal from noise.",
+        "Scanning the stack.",
+        "Finding the part that matters.",
+        "Distilling the noise.",
+        "Checking the pulse of the stack.",
+        "Warming up the brief."
+    ];
 
     private string PageTitle => _issue is null ? "Signal Brief" : $"{_issue.NewsletterTitle} - {_issue.IssueDate}";
     private string? LatestIssueDate => string.IsNullOrWhiteSpace(_index.LatestDate) ? _index.Issues.FirstOrDefault()?.Date : _index.LatestDate;
@@ -184,6 +196,7 @@ else
         _errorMessage = null;
         _issue = null;
         _currentIssueDate = null;
+        _loadingHeading = PickLoadingHeading(IssueDate);
 
         try
         {
@@ -236,5 +249,15 @@ else
     private static string IssueHref(string issueDate)
     {
         return $"/issue/{Uri.EscapeDataString(issueDate)}";
+    }
+
+    private static string PickLoadingHeading(string? issueDate)
+    {
+        if (DateOnly.TryParseExact(issueDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var parsedDate))
+        {
+            return $"Opening the {parsedDate:MMMM d} brief.";
+        }
+
+        return LatestLoadingHeadings[Random.Shared.Next(LatestLoadingHeadings.Length)];
     }
 }
