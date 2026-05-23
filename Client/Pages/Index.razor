@@ -35,42 +35,49 @@ else
             </div>
             <div class="issue-meta">
                 <p class="edition-label">@_issue.EditionLabel</p>
-                <p class="issue-date">
+                <button type="button"
+                        class="issue-date issue-date-trigger"
+                        aria-controls="archive-popover"
+                        aria-expanded="@(_isArchiveOpen ? "true" : "false")"
+                        @onclick="ToggleArchiveControls">
                     <span>@_issue.IssueDate</span>
                     @if (IsLatestIssue)
                     {
                         <span class="latest-badge">Latest</span>
                     }
-                </p>
+                </button>
+
+                @if (_isArchiveOpen)
+                {
+                    <section id="archive-popover" class="archive-popover" aria-label="Newsletter archive navigation">
+                        <div class="archive-actions">
+                            <div class="archive-summary">
+                                <p class="section-kicker">Archive</p>
+                                <p class="archive-current">@ArchiveLabel</p>
+                            </div>
+
+                            @if (_olderIssue is not null)
+                            {
+                                <a class="pager-link" href="@IssueHref(_olderIssue.Date)">Older</a>
+                            }
+                            else
+                            {
+                                <span class="pager-link disabled" aria-disabled="true">Older</span>
+                            }
+
+                            @if (_newerIssue is not null)
+                            {
+                                <a class="pager-link" href="@IssueHref(_newerIssue.Date)">Newer</a>
+                            }
+                            else
+                            {
+                                <span class="pager-link disabled" aria-disabled="true">Newer</span>
+                            }
+                        </div>
+                    </section>
+                }
             </div>
         </header>
-
-        <section class="archive-bar" aria-label="Newsletter archive navigation">
-            <div class="archive-actions">
-                <div class="archive-summary">
-                    <p class="section-kicker">Archive</p>
-                    <p class="archive-current">@ArchiveLabel</p>
-                </div>
-
-                @if (_olderIssue is not null)
-                {
-                    <a class="pager-link" href="@IssueHref(_olderIssue.Date)">Older</a>
-                }
-                else
-                {
-                    <span class="pager-link disabled" aria-disabled="true">Older</span>
-                }
-
-                @if (_newerIssue is not null)
-                {
-                    <a class="pager-link" href="@IssueHref(_newerIssue.Date)">Newer</a>
-                }
-                else
-                {
-                    <span class="pager-link disabled" aria-disabled="true">Newer</span>
-                }
-            </div>
-        </section>
 
         <section class="tldr-panel" aria-labelledby="tldr-heading">
             <p class="section-kicker">TL;DR</p>
@@ -165,6 +172,7 @@ else
     private NewsletterIndexItem? _olderIssue;
     private DeploymentDisplayInfo? _deployment;
     private bool _isLoading = true;
+    private bool _isArchiveOpen;
     private string? _errorMessage;
     private string? _currentIssueDate;
     private string _loadingHeading = DefaultLoadingHeading;
@@ -192,6 +200,7 @@ else
         _errorMessage = null;
         _issue = null;
         _currentIssueDate = null;
+        _isArchiveOpen = false;
         _loadingHeading = GetBrowserLoadingHeading();
 
         try
@@ -245,6 +254,11 @@ else
     private static string IssueHref(string issueDate)
     {
         return $"/issue/{Uri.EscapeDataString(issueDate)}";
+    }
+
+    private void ToggleArchiveControls()
+    {
+        _isArchiveOpen = !_isArchiveOpen;
     }
 
     private string GetBrowserLoadingHeading()
