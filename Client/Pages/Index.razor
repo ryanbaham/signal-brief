@@ -49,9 +49,11 @@ else
             </div>
         </header>
 
-        @if (_isArchiveOpen)
-        {
-            <section id="archive-panel" class="archive-section" aria-label="Newsletter archive navigation">
+        <section id="archive-panel"
+                 class="@ArchiveSectionClass"
+                 aria-label="Newsletter archive navigation"
+                 aria-hidden="@(_isArchiveOpen ? "false" : "true")">
+            <div class="archive-section-clip">
                 <div class="archive-card">
                     <div class="archive-actions">
                         <div class="archive-summary">
@@ -61,7 +63,7 @@ else
 
                         @if (_olderIssue is not null)
                         {
-                            <a class="pager-link" href="@IssueHref(_olderIssue.Date)">Older</a>
+                            <a class="pager-link" href="@IssueHref(_olderIssue.Date)" tabindex="@ArchiveControlTabIndex">Older</a>
                         }
                         else
                         {
@@ -70,7 +72,7 @@ else
 
                         @if (_newerIssue is not null)
                         {
-                            <a class="pager-link" href="@IssueHref(_newerIssue.Date)">Newer</a>
+                            <a class="pager-link" href="@IssueHref(_newerIssue.Date)" tabindex="@ArchiveControlTabIndex">Newer</a>
                         }
                         else
                         {
@@ -78,8 +80,8 @@ else
                         }
                     </div>
                 </div>
-            </section>
-        }
+            </div>
+        </section>
 
         <section class="tldr-panel" aria-labelledby="tldr-heading">
             <p class="section-kicker">TL;DR</p>
@@ -183,6 +185,8 @@ else
     private string PageTitle => _issue is null ? "Signal Brief" : $"{_issue.NewsletterTitle} - {_issue.IssueDate}";
     private string? LatestIssueDate => string.IsNullOrWhiteSpace(_index.LatestDate) ? _index.Issues.FirstOrDefault()?.Date : _index.LatestDate;
     private bool IsLatestIssue => string.Equals(_currentIssueDate, LatestIssueDate, StringComparison.OrdinalIgnoreCase);
+    private string ArchiveSectionClass => _isArchiveOpen ? "archive-section is-open" : "archive-section";
+    private string? ArchiveControlTabIndex => _isArchiveOpen ? null : "-1";
 
     private string ArchiveLabel => _index.Issues.Count switch
     {
