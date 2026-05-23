@@ -28,6 +28,12 @@ jobs:
             10.0.x
             9.0.x
 
+      - name: Stamp deployment metadata
+        shell: bash
+        run: |
+          deployed_at="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          printf '{\n  "deployedAtUtc": "%s",\n  "commitSha": "%s"\n}\n' "$deployed_at" "$GITHUB_SHA" > Client/wwwroot/deployment.json
+
       - name: Publish client
         run: dotnet publish Client/BlazorBasic.csproj -c Release -o publish/client
 

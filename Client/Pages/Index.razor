@@ -1,6 +1,7 @@
 @page "/"
 @page "/issue/{IssueDate}"
 @inject NewsletterDataService Newsletters
+@inject DeploymentInfoService DeploymentInfo
 
 <PageTitle>@PageTitle</PageTitle>
 
@@ -135,7 +136,13 @@ else
         </section>
 
         <footer class="footer-note">
-            @_issue.FooterNote
+            <span>@_issue.FooterNote</span>
+            @if (_deployment is not null)
+            {
+                <span class="deployment-stamp" title="@_deployment.LocalTime" tabindex="0">
+                    Deployed @_deployment.DisplayDate
+                </span>
+            }
         </footer>
     </main>
 }
@@ -148,6 +155,7 @@ else
     private NewsletterIssue? _issue;
     private NewsletterIndexItem? _newerIssue;
     private NewsletterIndexItem? _olderIssue;
+    private DeploymentDisplayInfo? _deployment;
     private bool _isLoading = true;
     private string? _errorMessage;
 
@@ -168,6 +176,7 @@ else
 
         try
         {
+            _deployment = await DeploymentInfo.GetDisplayInfoAsync();
             _index = await Newsletters.GetIndexAsync();
             var targetDate = string.IsNullOrWhiteSpace(IssueDate) ? _index.LatestDate : IssueDate;
 
