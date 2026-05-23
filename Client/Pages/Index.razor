@@ -30,11 +30,14 @@ else
 {
     <main class="newsletter-shell">
         <header class="masthead" aria-label="Newsletter masthead">
-            <div>
-                <a class="brand-lockup" href="/">@_issue.NewsletterTitle</a>
+            <div class="brand-stack">
+                <a class="brand-lockup" href="/" aria-label="@_issue.NewsletterTitle home">
+                    <img class="brand-mark" src="images/signal-brief-mark.svg" alt="">
+                    <span>@_issue.NewsletterTitle</span>
+                </a>
+                <p class="edition-label">@_issue.EditionLabel</p>
             </div>
             <div class="issue-meta">
-                <p class="edition-label">@_issue.EditionLabel</p>
                 <button type="button"
                         class="issue-date issue-date-trigger"
                         aria-controls="archive-panel"
