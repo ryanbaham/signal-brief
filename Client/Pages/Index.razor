@@ -2,6 +2,7 @@
 @page "/issue/{IssueDate}"
 @inject NewsletterDataService Newsletters
 @inject DeploymentInfoService DeploymentInfo
+@inject NavigationManager Navigation
 
 <PageTitle>@PageTitle</PageTitle>
 
@@ -34,24 +35,30 @@ else
             </div>
             <div class="issue-meta">
                 <p class="edition-label">@_issue.EditionLabel</p>
-                <p class="issue-date">@_issue.IssueDate</p>
+                <p class="issue-date">
+                    <span>@_issue.IssueDate</span>
+                    @if (IsLatestIssue)
+                    {
+                        <span class="latest-badge">Latest</span>
+                    }
+                </p>
             </div>
         </header>
 
         <section class="archive-bar" aria-label="Newsletter archive navigation">
-            <div>
+            <div class="archive-summary">
                 <p class="section-kicker">Archive</p>
                 <p class="archive-current">@ArchiveLabel</p>
             </div>
             <div class="archive-actions">
-                @if (_newerIssue is not null)
-                {
-                    <a class="pager-link" href="@IssueHref(_newerIssue.Date)">Newer</a>
-                }
-                else
-                {
-                    <span class="pager-link disabled" aria-disabled="true">Newer</span>
-                }
+                <label class="archive-date-picker">
+                    <span>Issue date</span>
+                    <input type="date"
+                           value="@_selectedArchiveDate"
+                           min="@EarliestIssueDate"
+                           max="@LatestIssueDate"
+                           @onchange="OnArchiveDateChanged">
+                </label>
 
                 @if (_olderIssue is not null)
                 {
@@ -61,7 +68,20 @@ else
                 {
                     <span class="pager-link disabled" aria-disabled="true">Older</span>
                 }
+
+                @if (_newerIssue is not null)
+                {
+                    <a class="pager-link" href="@IssueHref(_newerIssue.Date)">Newer</a>
+                }
+                else
+                {
+                    <span class="pager-link disabled" aria-disabled="true">Newer</span>
+                }
             </div>
+            @if (!string.IsNullOrWhiteSpace(_archiveMessage))
+            {
+                <p class="archive-message" role="status">@_archiveMessage</p>
+            }
         </section>
 
         <section class="tldr-panel" aria-labelledby="tldr-heading">
@@ -158,8 +178,13 @@ else
     private DeploymentDisplayInfo? _deployment;
     private bool _isLoading = true;
     private string? _errorMessage;
+    private string? _selectedArchiveDate;
+    private string? _archiveMessage;
 
     private string PageTitle => _issue is null ? "Signal Brief" : $"{_issue.NewsletterTitle} - {_issue.IssueDate}";
+    private string? LatestIssueDate => string.IsNullOrWhiteSpace(_index.LatestDate) ? _index.Issues.FirstOrDefault()?.Date : _index.LatestDate;
+    private string? EarliestIssueDate => _index.Issues.LastOrDefault()?.Date;
+    private bool IsLatestIssue => string.Equals(_selectedArchiveDate, LatestIssueDate, StringComparison.OrdinalIgnoreCase);
 
     private string ArchiveLabel => _index.Issues.Count switch
     {
@@ -172,6 +197,7 @@ else
     {
         _isLoading = true;
         _errorMessage = null;
+        _archiveMessage = null;
         _issue = null;
 
         try
@@ -187,6 +213,7 @@ else
             }
 
             _issue = await Newsletters.GetIssueAsync(targetDate);
+            _selectedArchiveDate = targetDate;
             SetArchiveNeighbors(targetDate);
 
             if (_issue is null)
@@ -219,6 +246,27 @@ else
 
         _newerIssue = currentIndex > 0 ? issues[currentIndex - 1] : null;
         _olderIssue = currentIndex < issues.Count - 1 ? issues[currentIndex + 1] : null;
+    }
+
+    private void OnArchiveDateChanged(ChangeEventArgs args)
+    {
+        var selectedDate = args.Value?.ToString();
+        _selectedArchiveDate = selectedDate;
+
+        if (string.IsNullOrWhiteSpace(selectedDate))
+        {
+            return;
+        }
+
+        var issueExists = _index.Issues.Exists(issue => string.Equals(issue.Date, selectedDate, StringComparison.OrdinalIgnoreCase));
+
+        if (issueExists)
+        {
+            Navigation.NavigateTo(IssueHref(selectedDate));
+            return;
+        }
+
+        _archiveMessage = $"No Signal Brief is available for {selectedDate}.";
     }
 
     private static string IssueHref(string issueDate)
