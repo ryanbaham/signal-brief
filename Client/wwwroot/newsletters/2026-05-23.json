@@ -1,0 +1,98 @@
+{
+  "newsletterTitle": "Signal Brief",
+  "editionLabel": "Weekly Tech Intelligence",
+  "issueDate": "May 23, 2026",
+  "tldrHeading": "The most important signals",
+  "tldrItems": [
+    "AI infrastructure is maturing around evaluation, traceability, cost control, and ownership instead of model demos alone.",
+    "Cloud buyers want provable residency, smaller operational blast radii, and cleaner regional control planes.",
+    "Security teams are treating identity behavior and session telemetry as frontline evidence.",
+    "Inference economics are putting memory bandwidth, data movement, and tokens per watt at the center of chip strategy.",
+    "AI coding assistants and agent workflows are creating new expectations for review, provenance, and escalation design."
+  ],
+  "featured": {
+    "kicker": "Featured Analysis",
+    "title": "The AI stack is moving from demo magic to operating discipline.",
+    "summary": "Enterprise teams are shifting attention from model novelty to traceability, cost control, evaluation loops, and workflow ownership. The winning platforms now look less like chat surfaces and more like dependable infrastructure.",
+    "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+    "imageAlt": "Close view of a circuit board with illuminated pathways",
+    "readTime": "8 min read",
+    "category": "AI Platforms",
+    "date": "May 22, 2026",
+    "bodyParagraphs": [
+      "The center of gravity in AI is moving away from isolated prompts and toward managed systems. Buyers still care about model quality, but the boardroom questions have changed: who approved the workflow, what did it cost, how was the answer evaluated, and can the organization reproduce the decision path six months later?",
+      "That shift favors platforms with strong observability, permissions, data boundaries, and human escalation paths. The companies that win the next phase will not only offer smarter models; they will help teams operate AI with the same discipline they expect from cloud, security, and financial systems."
+    ]
+  },
+  "articleSectionKicker": "Briefing Queue",
+  "articleSectionTitle": "Worth your next coffee",
+  "articles": [
+    {
+      "category": "Cloud",
+      "title": "Sovereign cloud demand is rewriting regional infrastructure plans.",
+      "summary": "Regulated customers are asking for smaller blast radii, tighter residency guarantees, and procurement language that proves where workloads live.",
+      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Earth seen from space with connected light trails",
+      "bodyParagraphs": [
+        "Sovereign cloud is becoming less of a marketing label and more of a checklist. Customers want regional operations, auditable support access, key control, and clear evidence that data does not drift into unintended jurisdictions.",
+        "This changes the shape of infrastructure planning. Providers need repeatable local deployments, partner ecosystems that can pass compliance review, and controls that are understandable to procurement teams as well as engineers."
+      ]
+    },
+    {
+      "category": "Security",
+      "title": "Identity telemetry is becoming the new perimeter signal.",
+      "summary": "Attackers keep blending into legitimate workflows, pushing defenders toward behavior baselines, device posture, and session-level audit trails.",
+      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Security operations screens showing system activity",
+      "bodyParagraphs": [
+        "The most useful security evidence increasingly comes from how identities behave after login. A valid credential is no longer comforting by itself when session hijacking, token theft, and social engineering can make malicious activity look ordinary.",
+        "Mature programs are connecting sign-in context, endpoint posture, app activity, and unusual workflow changes. The goal is not more alerts; it is a cleaner story about whether a session still deserves trust."
+      ]
+    },
+    {
+      "category": "Automation",
+      "title": "Robotics pilots are leaving the lab and entering brownfield workflows.",
+      "summary": "The practical story is less humanoid spectacle and more reliable perception, safer handoffs, and maintenance teams that can own the system.",
+      "imageUrl": "https://images.unsplash.com/photo-1591696331111-ef9586a5b17a?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Robotic arm working beside illuminated industrial equipment",
+      "bodyParagraphs": [
+        "The robotics market is getting more serious as deployments move into warehouses, factories, hospitals, and inspection routes that were not designed for robots. That means the hard problems are often ordinary: lighting, floor markings, downtime, training, and exception handling.",
+        "Successful pilots are narrowing the task, measuring reliability, and designing clean handoffs to people. The near-term winners will be systems that fit into existing work without requiring the entire site to be rebuilt around them."
+      ]
+    },
+    {
+      "category": "Silicon",
+      "title": "Inference economics are pulling chip roadmaps toward memory bandwidth.",
+      "summary": "As production workloads scale, teams are measuring tokens per watt, latency under load, and the hidden tax of moving data around.",
+      "imageUrl": "https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Computer graphics workstation displaying a complex chip design",
+      "bodyParagraphs": [
+        "Training grabs attention, but inference is where many AI businesses will feel margin pressure every day. Once models sit inside products, the cost of serving them at low latency becomes a product constraint, not a research footnote.",
+        "That pushes chip design toward memory bandwidth, interconnect efficiency, and software stacks that keep hardware fed. The key metric is not peak performance in isolation; it is useful throughput under real customer demand."
+      ]
+    },
+    {
+      "category": "Developer Tools",
+      "title": "AI coding assistants are forcing a rethink of review culture.",
+      "summary": "The best teams are documenting generated-code provenance, tightening tests, and making review prompts as intentional as code comments.",
+      "imageUrl": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Team collaborating around laptops in a modern workspace",
+      "bodyParagraphs": [
+        "AI coding tools are changing what reviewers need to inspect. The question is no longer only whether a human understood the diff; it is also whether generated code was grounded in the right context, tested against the right risks, and kept inside project conventions.",
+        "Strong teams are responding with better acceptance criteria, smaller reviewable changes, and explicit notes about AI-assisted decisions. This is less about slowing developers down and more about making fast work legible."
+      ]
+    },
+    {
+      "category": "AI Agents",
+      "title": "Agent reliability is becoming a product design problem.",
+      "summary": "Better autonomy depends on scoped tools, graceful escalation, observable decisions, and interfaces that make uncertainty visible without adding noise.",
+      "imageUrl": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Minimal white robot head against a clean technology background",
+      "bodyParagraphs": [
+        "Agent reliability is not solved by giving a model more tools. It depends on defining what the agent can change, where it must ask for help, and how users can understand the path from instruction to action.",
+        "The best agent products will feel calm because the boundaries are clear. They will expose uncertainty when it matters, preserve an audit trail, and make escalation feel like part of the workflow rather than a failure state."
+      ]
+    }
+  ],
+  "footerNote": "You are receiving Signal Brief because you follow enterprise technology, AI infrastructure, and market-moving platform shifts."
+}

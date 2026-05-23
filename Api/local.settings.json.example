@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "Newsletter__BlobConnectionString": "",
+    "Newsletter__ContainerName": "",
+    "Newsletter__IndexBlobName": "newsletters/index.json",
+    "Newsletter__IssueBlobNamePattern": "newsletters/{date}.json"
+  }
+}

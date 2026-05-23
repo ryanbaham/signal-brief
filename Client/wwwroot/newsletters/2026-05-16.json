@@ -1,0 +1,54 @@
+{
+  "newsletterTitle": "Signal Brief",
+  "editionLabel": "Weekly Tech Intelligence",
+  "issueDate": "May 16, 2026",
+  "tldrHeading": "The most important signals",
+  "tldrItems": [
+    "Operational AI is becoming a governance problem before it is a model-selection problem.",
+    "Private data movement is pushing teams toward smaller, auditable integration surfaces.",
+    "Security evidence is becoming more valuable when it preserves session context, not just event counts.",
+    "Cloud architecture decisions are moving closer to legal, procurement, and risk teams.",
+    "Developer platforms are being judged by how well they preserve provenance across automated work."
+  ],
+  "featured": {
+    "kicker": "Featured Analysis",
+    "title": "Trust, telemetry, and infrastructure discipline move up the stack.",
+    "summary": "The next wave of platform work is less about adding another tool and more about making the tool accountable inside normal operations.",
+    "imageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
+    "imageAlt": "Laptop showing analytics charts in a focused workspace",
+    "readTime": "7 min read",
+    "category": "Platforms",
+    "date": "May 16, 2026",
+    "bodyParagraphs": [
+      "Enterprise technology teams are asking a sharper question: can the organization explain what happened after the fact? That question is shaping AI workflows, cloud design, identity strategy, and software delivery.",
+      "The strongest platforms are starting to look like operational systems rather than experiments. They log decisions, respect boundaries, surface uncertainty, and give people enough context to intervene before an automated workflow becomes expensive."
+    ]
+  },
+  "articleSectionKicker": "Briefing Queue",
+  "articleSectionTitle": "Signals to keep on the board",
+  "articles": [
+    {
+      "category": "Data",
+      "title": "Private data products are becoming smaller and more contract-driven.",
+      "summary": "Teams are narrowing interfaces so sensitive datasets can be used without turning every integration into a trust exercise.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Data dashboard on a computer display",
+      "bodyParagraphs": [
+        "The broad data lake promise is running into a more pragmatic pattern: fewer interfaces, clearer contracts, and stronger ownership. Teams want access paths that are useful without being sprawling.",
+        "That favors governed APIs, durable metadata, and data products with support expectations. The win is less about centralizing everything and more about making access understandable."
+      ]
+    },
+    {
+      "category": "Security",
+      "title": "Session context is becoming the useful unit of investigation.",
+      "summary": "Security teams need a replayable story of user intent, device posture, and application behavior.",
+      "imageUrl": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80",
+      "imageAlt": "Security dashboard with charts and warning indicators",
+      "bodyParagraphs": [
+        "Flat event streams can tell teams that something happened, but they rarely explain the shape of a session. Investigators need connective tissue between identity, endpoint, browser, and application state.",
+        "That is turning telemetry design into a product concern. Useful evidence has to survive handoffs, summarize cleanly, and make it obvious what changed from normal behavior."
+      ]
+    }
+  ],
+  "footerNote": "You are receiving Signal Brief because you follow enterprise technology, AI infrastructure, and market-moving platform shifts."
+}

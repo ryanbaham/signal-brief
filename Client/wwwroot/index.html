@@ -4,20 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BlazorBasic</title>
+    <title>Signal Brief</title>
     <base href="/" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
-    <link href="BlazorBasic.styles.css" rel="stylesheet" />
+    <link href="SignalBrief.Client.styles.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <main class="newsletter-shell">
+            <section class="loading-panel" aria-live="polite">
+                <p class="section-kicker">Signal Brief</p>
+                <h1>Loading the latest issue...</h1>
+            </section>
+        </main>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
+        <a class="dismiss">x</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
