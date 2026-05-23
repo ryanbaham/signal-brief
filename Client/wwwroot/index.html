@@ -8,6 +8,7 @@
     <base href="/" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="SignalBrief.Client.styles.css" rel="stylesheet" />
+    <script src="js/loading-screen.js"></script>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
         <main class="newsletter-shell loading-shell">
             <section class="loading-panel" aria-live="polite">
                 <p class="section-kicker">Signal Brief</p>
-                <h1>Tuning the signal.</h1>
+                <h1><script>document.write(window.signalBriefLoading.getHeading());</script><noscript>Tuning the signal.</noscript></h1>
             </section>
         </main>
     </div>

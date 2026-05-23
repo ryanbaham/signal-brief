@@ -2,6 +2,7 @@
 @page "/issue/{IssueDate}"
 @inject NewsletterDataService Newsletters
 @inject DeploymentInfoService DeploymentInfo
+@inject IJSRuntime JavaScript
 
 <PageTitle>@PageTitle</PageTitle>
 
@@ -166,18 +167,8 @@ else
     private bool _isLoading = true;
     private string? _errorMessage;
     private string? _currentIssueDate;
-    private string _loadingHeading = PickLoadingHeading(null);
-
-    private static readonly string[] LatestLoadingHeadings =
-    [
-        "Tuning the signal.",
-        "Separating signal from noise.",
-        "Scanning the stack.",
-        "Finding the part that matters.",
-        "Distilling the noise.",
-        "Checking the pulse of the stack.",
-        "Warming up the brief."
-    ];
+    private string _loadingHeading = DefaultLoadingHeading;
+    private const string DefaultLoadingHeading = "Tuning the signal.";
 
     private string PageTitle => _issue is null ? "Signal Brief" : $"{_issue.NewsletterTitle} - {_issue.IssueDate}";
     private string? LatestIssueDate => string.IsNullOrWhiteSpace(_index.LatestDate) ? _index.Issues.FirstOrDefault()?.Date : _index.LatestDate;
@@ -190,13 +181,18 @@ else
         _ => $"{_index.Issues.Count} issues available"
     };
 
+    protected override void OnInitialized()
+    {
+        _loadingHeading = GetBrowserLoadingHeading();
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         _isLoading = true;
         _errorMessage = null;
         _issue = null;
         _currentIssueDate = null;
-        _loadingHeading = PickLoadingHeading(IssueDate);
+        _loadingHeading = GetBrowserLoadingHeading();
 
         try
         {
@@ -251,13 +247,20 @@ else
         return $"/issue/{Uri.EscapeDataString(issueDate)}";
     }
 
-    private static string PickLoadingHeading(string? issueDate)
+    private string GetBrowserLoadingHeading()
     {
-        if (DateOnly.TryParseExact(issueDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var parsedDate))
+        try
         {
-            return $"Opening the {parsedDate:MMMM d} brief.";
+            if (JavaScript is IJSInProcessRuntime inProcessRuntime)
+            {
+                return inProcessRuntime.Invoke<string>("signalBriefLoading.getHeading") ?? DefaultLoadingHeading;
+            }
+        }
+        catch (JSException)
+        {
+            return DefaultLoadingHeading;
         }
 
-        return LatestLoadingHeadings[Random.Shared.Next(LatestLoadingHeadings.Length)];
+        return DefaultLoadingHeading;
     }
 }
