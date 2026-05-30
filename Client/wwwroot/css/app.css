@@ -65,7 +65,6 @@ a {
 .brand-lockup {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
     color: var(--color-ink);
     font-family: var(--font-serif);
     font-size: 3rem;
@@ -75,22 +74,17 @@ a {
     text-decoration: none;
 }
 
-.brand-mark {
-    width: 0.72em;
-    min-width: 2.15rem;
-    height: auto;
-    transform: translateY(0.03em);
-}
-
 .brand-stack .edition-label {
+    font-size: 0.9rem;
     margin: 0;
-    padding-left: 2.65rem;
 }
 
 .issue-meta {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
 }
 
 .edition-label,
@@ -117,26 +111,8 @@ a {
     gap: 0.45rem;
     margin: 0;
     color: var(--color-ink);
+    font-size: 0.9rem;
     letter-spacing: 0.18em;
-}
-
-.issue-date-trigger {
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    cursor: pointer;
-    font: inherit;
-    padding: 0.2rem 0;
-}
-
-.issue-date-trigger:hover,
-.issue-date-trigger:focus-visible {
-    color: var(--color-signal);
-}
-
-.issue-date-trigger:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--color-signal) 45%, transparent);
-    outline-offset: 0.25rem;
 }
 
 .latest-badge {
@@ -154,20 +130,8 @@ a {
 }
 
 .archive-section {
-    display: grid;
-    grid-template-rows: 0fr;
-    margin-top: 0;
-    opacity: 0;
-    overflow: hidden;
-    transform: translateY(-0.7rem);
-    transition: grid-template-rows 0.28s ease, margin-top 0.28s ease, opacity 0.22s ease, transform 0.28s ease;
-}
-
-.archive-section.is-open {
-    grid-template-rows: 1fr;
-    margin-top: 1rem;
-    opacity: 1;
-    transform: translateY(0);
+    width: 100%;
+    margin-top: 0.65rem;
 }
 
 .archive-section-clip {
@@ -176,31 +140,22 @@ a {
 }
 
 .archive-card {
-    display: flex;
+    display: inline-flex;
     justify-content: flex-end;
-    width: 100%;
-    border: 1px solid color-mix(in srgb, var(--color-line) 76%, var(--color-surface));
-    border-radius: 0.5rem;
-    background: color-mix(in srgb, var(--color-surface) 88%, var(--color-paper));
-    box-shadow: 0 1rem 2rem -1.7rem rgba(37, 48, 65, 0.34);
-    padding: 0.65rem;
+    width: auto;
+    margin-left: auto;
 }
 
 .archive-summary {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.4rem 0.75rem;
-}
-
-.archive-summary .section-kicker {
-    margin: 0;
 }
 
 .archive-current {
     margin: 0;
     color: var(--color-muted);
-    font-size: 0.8rem;
+    font-size: 0.72rem;
 }
 
 .archive-actions {
@@ -208,7 +163,7 @@ a {
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.5rem;
+    gap: 0.35rem;
     width: 100%;
 }
 
@@ -221,15 +176,15 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.15rem;
+    min-height: 1.75rem;
     border: 1px solid var(--color-line);
-    border-radius: 0.45rem;
+    border-radius: 0.35rem;
     background: var(--color-surface);
     color: var(--color-circuit);
-    font-size: 0.75rem;
+    font-size: 0.66rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    padding: 0.45rem 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 0.32rem 0.55rem;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -521,7 +476,7 @@ a {
 
     .masthead {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: stretch;
         justify-content: space-between;
     }
 
@@ -534,13 +489,25 @@ a {
     }
 
     .brand-stack .edition-label {
-        padding-left: 4.4rem;
+        font-size: 0.95rem;
     }
 
     .issue-meta {
         align-items: flex-end;
-        padding-top: 4.35rem;
+        min-width: min(28rem, 44vw);
         text-align: right;
+    }
+
+    .issue-date {
+        font-size: 1rem;
+    }
+
+    .issue-meta .archive-section {
+        position: absolute;
+        top: calc(50% + 1rem);
+        right: 0;
+        width: min(28rem, 44vw);
+        margin-top: 0;
     }
 
     .tldr-panel {

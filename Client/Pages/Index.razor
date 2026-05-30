@@ -32,59 +32,52 @@ else
         <header class="masthead" aria-label="Newsletter masthead">
             <div class="brand-stack">
                 <a class="brand-lockup" href="/" aria-label="@_issue.NewsletterTitle home">
-                    <img class="brand-mark" src="images/signal-brief-mark.svg" alt="">
                     <span>@_issue.NewsletterTitle</span>
                 </a>
                 <p class="edition-label">@_issue.EditionLabel</p>
             </div>
             <div class="issue-meta">
-                <button type="button"
-                        class="issue-date issue-date-trigger"
-                        aria-controls="archive-panel"
-                        aria-expanded="@(_isArchiveOpen ? "true" : "false")"
-                        @onclick="ToggleArchiveControls">
+                <div class="issue-date" aria-label="Issue date">
                     <span>@_issue.IssueDate</span>
                     @if (IsLatestIssue)
                     {
                         <span class="latest-badge">Latest</span>
                     }
-                </button>
+                </div>
+
+                <section id="archive-panel"
+                         class="archive-section"
+                         aria-label="Newsletter archive navigation">
+                    <div class="archive-section-clip">
+                        <div class="archive-card">
+                            <div class="archive-actions">
+                                <div class="archive-summary">
+                                    <p class="archive-current">@ArchiveLabel</p>
+                                </div>
+
+                                @if (_olderIssue is not null)
+                                {
+                                    <a class="pager-link" href="@IssueHref(_olderIssue.Date)">Older</a>
+                                }
+                                else
+                                {
+                                    <span class="pager-link disabled" aria-disabled="true">Older</span>
+                                }
+
+                                @if (_newerIssue is not null)
+                                {
+                                    <a class="pager-link" href="@IssueHref(_newerIssue.Date)">Newer</a>
+                                }
+                                else
+                                {
+                                    <span class="pager-link disabled" aria-disabled="true">Newer</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </header>
-
-        <section id="archive-panel"
-                 class="@ArchiveSectionClass"
-                 aria-label="Newsletter archive navigation"
-                 aria-hidden="@(_isArchiveOpen ? "false" : "true")">
-            <div class="archive-section-clip">
-                <div class="archive-card">
-                    <div class="archive-actions">
-                        <div class="archive-summary">
-                            <p class="section-kicker">Archive</p>
-                            <p class="archive-current">@ArchiveLabel</p>
-                        </div>
-
-                        @if (_olderIssue is not null)
-                        {
-                            <a class="pager-link" href="@IssueHref(_olderIssue.Date)" tabindex="@ArchiveControlTabIndex">Older</a>
-                        }
-                        else
-                        {
-                            <span class="pager-link disabled" aria-disabled="true">Older</span>
-                        }
-
-                        @if (_newerIssue is not null)
-                        {
-                            <a class="pager-link" href="@IssueHref(_newerIssue.Date)" tabindex="@ArchiveControlTabIndex">Newer</a>
-                        }
-                        else
-                        {
-                            <span class="pager-link disabled" aria-disabled="true">Newer</span>
-                        }
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="tldr-panel" aria-labelledby="tldr-heading">
             <p class="section-kicker">TL;DR</p>
@@ -179,7 +172,6 @@ else
     private NewsletterIndexItem? _olderIssue;
     private DeploymentDisplayInfo? _deployment;
     private bool _isLoading = true;
-    private bool _isArchiveOpen;
     private string? _errorMessage;
     private string? _currentIssueDate;
     private string _loadingHeading = DefaultLoadingHeading;
@@ -188,8 +180,6 @@ else
     private string PageTitle => _issue is null ? "Signal Brief" : $"{_issue.NewsletterTitle} - {_issue.IssueDate}";
     private string? LatestIssueDate => string.IsNullOrWhiteSpace(_index.LatestDate) ? _index.Issues.FirstOrDefault()?.Date : _index.LatestDate;
     private bool IsLatestIssue => string.Equals(_currentIssueDate, LatestIssueDate, StringComparison.OrdinalIgnoreCase);
-    private string ArchiveSectionClass => _isArchiveOpen ? "archive-section is-open" : "archive-section";
-    private string? ArchiveControlTabIndex => _isArchiveOpen ? null : "-1";
 
     private string ArchiveLabel => _index.Issues.Count switch
     {
@@ -209,7 +199,6 @@ else
         _errorMessage = null;
         _issue = null;
         _currentIssueDate = null;
-        _isArchiveOpen = false;
         _loadingHeading = GetBrowserLoadingHeading();
 
         try
@@ -263,11 +252,6 @@ else
     private static string IssueHref(string issueDate)
     {
         return $"/issue/{Uri.EscapeDataString(issueDate)}";
-    }
-
-    private void ToggleArchiveControls()
-    {
-        _isArchiveOpen = !_isArchiveOpen;
     }
 
     private string GetBrowserLoadingHeading()
